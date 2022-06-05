@@ -21,9 +21,10 @@ class Field extends StatelessWidget {
           hintStyle: GoogleFonts.inter(
             fontSize: 20,
             color: color3,
+            fontWeight: FontWeight.bold,
           ),
           filled: true,
-          fillColor: Colors.amber,
+          fillColor: color1,
           border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(15)),
             borderSide: BorderSide.none,
