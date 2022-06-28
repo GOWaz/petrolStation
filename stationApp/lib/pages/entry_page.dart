@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stationapp/constants.dart';
+import 'package:stationapp/pages/mani_page.dart';
 import 'package:stationapp/widgets/field.dart';
 import 'package:stationapp/widgets/signIn_button.dart';
 
@@ -39,7 +40,11 @@ class EntryPage extends StatelessWidget {
                         padding: EdgeInsets.only(left: 60, right: 60),
                         child: Field(hint: "Password", secureText: true),
                       ),
-                      SignInButton(text: 'Login', onPress: () {})
+                      SignInButton(
+                          text: 'Login',
+                          onPress: () {
+                            Navigator.pushNamed(context, MainPage.routeName);
+                          })
                     ],
                   ),
                 ),
