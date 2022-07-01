@@ -4,10 +4,11 @@ import 'package:stationapp/constants.dart';
 import 'package:stationapp/widgets/field.dart';
 import 'package:stationapp/widgets/signIn_button.dart';
 
-import 'create_account_page.dart';
+import 'entery_page.dart';
 
-class EntryPage extends StatelessWidget {
-  const EntryPage({Key? key}) : super(key: key);
+class CreateAccount extends StatelessWidget {
+  const CreateAccount({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -17,33 +18,7 @@ class EntryPage extends StatelessWidget {
           children: [
             Row(
               children: [
-                Container(
-                  height: size.height,
-                  width: size.width / 2,
-                  color: Colors.white,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'SignIn',
-                        style: GoogleFonts.inter(fontSize: 60, color: color2),
-                      ),
-                      const SizedBox(
-                        height: 50,
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 60, right: 60),
-                        child: Field(hint: "Username"),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 60, right: 60),
-                        child: Field(hint: "Password", secureText: true),
-                      ),
-                      SignInButton(text: 'Login', onPress: () {})
-                    ],
-                  ),
-                ),
+
                 Container(
                   height: size.height,
                   width: size.width / 2,
@@ -58,7 +33,7 @@ class EntryPage extends StatelessWidget {
                         child: Image.asset('images/CircleAvatar.jpg'),
                       ),
                       Text(
-                        'Hello Friend !',
+                        'Welcome !',
                         style: GoogleFonts.inter(
                           fontSize: 30,
                           color: color4,
@@ -69,7 +44,7 @@ class EntryPage extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        'Enter Your Personal Details and Start Journey with Us',
+                        'To Keep Connected Please Login with your personal info',
                         style: GoogleFonts.inter(
                           fontSize: 20,
                           color: Colors.white,
@@ -78,12 +53,43 @@ class EntryPage extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      SignInButton(text: 'SingUp', onPress: () {
+                      SignInButton(text: 'Login', onPress: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const CreateAccount()),
+                          MaterialPageRoute(builder: (context) => const EntryPage()),
                         );
                       })
+                    ],
+                  ),
+                ),
+                Container(
+                  height: size.height,
+                  width: size.width / 2,
+                  color: Colors.white,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Create Account',
+                        style: GoogleFonts.inter(fontSize: 60, color: color2),
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 60, right: 60),
+                        child: Field(hint: "Name"),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 60, right: 60),
+                        child: Field(hint: "Email"),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 60, right: 60),
+                        child: Field(hint: "Password", secureText: true),
+                      ),
+                      SignInButton(text: 'Signup', onPress: () {})
                     ],
                   ),
                 ),
