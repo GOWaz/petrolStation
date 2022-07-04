@@ -36,6 +36,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^3.0.1
   smooth_page_indicator: ^1.0.0+2
+  shrink_sidemenu: ^2.0.0+2-null-safety
+  liquid_ui: ^1.0.0+9
+  carousel_slider: ^4.1.1
+  gradient_widgets: ^0.6.0
+  
+
 
 dev_dependencies:
   flutter_test:

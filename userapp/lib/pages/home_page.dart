@@ -1,84 +1,159 @@
-import 'package:userapp/widgets/page_upper_side.dart';
-import 'package:flutter/material.dart';
-import '../widgets/home_page_containers.dart';
 
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:gradient_widgets/gradient_widgets.dart';
+import 'package:shrink_sidemenu/shrink_sidemenu.dart';
+import 'package:flutter/material.dart';
+
+// ignore: must_be_immutable
 class HomePage extends StatelessWidget {
+
+
   const HomePage({Key? key}) : super(key: key);
 
   static const routeName = '/MainPage';
+  
+  BuildContext? get context => null;
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
 
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              PageUpperSide(title: 'Discover', size: size),
-              const SizedBox(height: 100),
-              Row(
-                children: [
-                  HomePageButtons(
-                    onTap: () {},
-                    containerIcon: const Icon(
-                      Icons.person,
-                      color: Color(0xFFFFECB3),
-                      size: 100,
-                    ),
-                    label: 'Profile',
-                    size: size,
-                  ),
-                  HomePageButtons(
-                    onTap: () {},
-                    containerIcon: const Icon(
-                      Icons.reorder,
-                      color: Color(0xFFFFECB3),
-                      size: 100,
-                    ),
-                    label: 'State',
-                    size: size,
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  HomePageButtons(
-                    onTap: () {},
-                    containerIcon: const Icon(
-                      Icons.money,
-                      color: Color(0xFFFFECB3),
-                      size: 100,
-                    ),
-                    label: 'Bills',
-                    size: size,
-                  ),
-                  HomePageButtons(
-                    onTap: () {},
-                    containerIcon: const Icon(
-                      Icons.directions_car,
-                      color: Color(0xFFFFECB3),
-                      size: 100,
-                    ),
-                    label: 'Add Car',
-                    size: size,
-                  ),
-                ],
-              ),
-              HomePageButtons(
-                onTap: () {},
-                containerIcon: const Icon(
-                  Icons.add_box_rounded,
-                  size: 100,
-                  color: Color(0xFFFFECB3),
-                ),
-                label: 'Request',
-                size: size,
-              )
-            ],
+    final GlobalKey<SideMenuState> sideMenuKey = GlobalKey<SideMenuState>();
+    return SideMenu(
+      background: Colors.teal,
+      key: sideMenuKey,
+      type: SideMenuType.shrinkNSlide,
+      menu: buildMenu(),
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          shadowColor: Colors.amber,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.menu,
+              color: Colors.teal,
+            ),
+            onPressed: () {
+              final state = sideMenuKey.currentState;
+              bool? ok = state?.isOpened;
+              ok = true;
+              if (ok) {
+                state?.openSideMenu();
+
+                // ignore: dead_code
+              } else {
+                state?.openSideMenu();
+              }
+            },
           ),
         ),
+        body: Column(),
+      ),
+    );
+  }
+
+  Widget buildMenu() {
+    
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: const [
+              CircleAvatar(
+                radius: 40,
+                backgroundImage: AssetImage('images/person.png'),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Text(
+                'Malak_Naef',
+                style: TextStyle(fontSize: 15),
+              ),
+            ],
+          ),
+          const Divider(
+            color: Colors.black,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          ListTile(
+            onTap: () {
+             
+            },
+            leading: const Icon(
+              Icons.person,
+              size: 20,
+              color: Colors.amber,
+            ),
+            title: const Text('Profile'),
+          ),
+          ListTile(
+            onTap: (){},
+            leading: const Icon(
+              Icons.request_quote_rounded,
+              size: 20,
+              color: Colors.amber,
+            ),
+            title: const Text('Request'),
+          ),
+          ListTile(
+            onTap: () {},
+            leading: const Icon(
+              Icons.map,
+              size: 20,
+              color: Colors.amber,
+            ),
+            title: const Text('Map'),
+          ),
+          ListTile(
+            onTap: () {},
+            leading: const Icon(
+              Icons.view_agenda,
+              size: 20,
+              color: Colors.amber,
+            ),
+            title: const Text('Veiw'),
+          ),
+          ListTile(
+            onTap: () {},
+            leading: const Icon(
+              Icons.payment,
+              size: 20,
+              color: Colors.amber,
+            ),
+            title: const Text('Payment'),
+          ),
+          ListTile(
+            onTap: () {},
+            leading: const Icon(
+              Icons.settings,
+              size: 20,
+              color: Colors.amber,
+            ),
+            title: const Text('Setting'),
+          ),
+          ListTile(
+            onTap: () {},
+            leading: const Icon(
+              Icons.report,
+              size: 20,
+              color: Colors.amber,
+            ),
+            title: const Text('Report'),
+          ),
+          ListTile(
+            onTap: () {},
+            leading: const Icon(
+              Icons.help,
+              size: 20,
+              color: Colors.amber,
+            ),
+            title: const Text('About us'),
+          ),
+        ],
       ),
     );
   }
