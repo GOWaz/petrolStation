@@ -29,17 +29,11 @@ class EntryPage extends StatelessWidget {
                         'SignIn',
                         style: GoogleFonts.inter(fontSize: 60, color: color2),
                       ),
-                      const SizedBox(
-                        height: 50,
+                      SizedBox(
+                        height: size.height / 8,
                       ),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 60, right: 60),
-                        child: Field(hint: "Username"),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 60, right: 60),
-                        child: Field(hint: "Password", secureText: true),
-                      ),
+                      const Field(hint: "Username"),
+                      const Field(hint: "Password", secureText: true),
                       SignInButton(
                           text: 'Login',
                           onPress: () {
@@ -69,8 +63,8 @@ class EntryPage extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(
-                        height: 10,
+                      SizedBox(
+                        height: size.height / 14,
                       ),
                       Text(
                         'If you haven\'t purchase a key feel free to contact us',
@@ -79,8 +73,8 @@ class EntryPage extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
-                      const SizedBox(
-                        height: 10,
+                      SizedBox(
+                        height: size.height / 14,
                       ),
                       Text(
                         'LINK',

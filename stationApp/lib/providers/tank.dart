@@ -6,6 +6,9 @@ class Tank with ChangeNotifier {
 
   void setPercentage() {
     _percentage = Random().nextInt(100);
+    if (_percentage < 20) {
+      _percentage = 20;
+    }
     notifyListeners();
   }
 
