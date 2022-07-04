@@ -1,6 +1,4 @@
 
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 import 'package:flutter/material.dart';
 import 'package:userapp/pages/profile.dart';
