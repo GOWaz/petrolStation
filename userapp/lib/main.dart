@@ -1,5 +1,6 @@
 import 'package:userapp/pages/home_page.dart';
 import 'package:userapp/pages/on_boarding.dart';
+import 'package:userapp/pages/profile.dart';
 import 'package:userapp/pages/sign_in.dart';
 import 'package:userapp/pages/sign_up.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class Main extends StatelessWidget {
         SignIn.routeName: (context) => const SignIn(),
         SignUp.routeName: (context) => const SignUp(),
         onBoarding.routeName: (context) => const onBoarding(),
-       
+       Profile.routeName: (context) =>  const Profile(),
 
       },
     );

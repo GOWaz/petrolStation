@@ -3,17 +3,14 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 import 'package:flutter/material.dart';
+import 'package:userapp/pages/profile.dart';
 
-// ignore: must_be_immutable
 class HomePage extends StatelessWidget {
-
 
   const HomePage({Key? key}) : super(key: key);
 
   static const routeName = '/MainPage';
   
-  BuildContext? get context => null;
-
   @override
   Widget build(BuildContext context) {
 
@@ -22,7 +19,7 @@ class HomePage extends StatelessWidget {
       background: Colors.teal,
       key: sideMenuKey,
       type: SideMenuType.shrinkNSlide,
-      menu: buildMenu(),
+      menu: buildMenu(context),
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -39,7 +36,8 @@ class HomePage extends StatelessWidget {
               if (ok) {
                 state?.openSideMenu();
 
-                // ignore: dead_code
+               
+              // ignore: dead_code
               } else {
                 state?.openSideMenu();
               }
@@ -51,7 +49,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget buildMenu() {
+  Widget buildMenu(BuildContext context) {
     
     return SingleChildScrollView(
       padding: const EdgeInsets.all(20),
@@ -81,7 +79,11 @@ class HomePage extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-             
+             Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const Profile()),
+  );
+
             },
             leading: const Icon(
               Icons.person,
