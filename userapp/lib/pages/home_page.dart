@@ -1,17 +1,15 @@
-
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 import 'package:flutter/material.dart';
 import 'package:userapp/pages/profile.dart';
+import 'package:userapp/pages/report.dart';
 
 class HomePage extends StatelessWidget {
-
   const HomePage({Key? key}) : super(key: key);
 
   static const routeName = '/MainPage';
-  
+
   @override
   Widget build(BuildContext context) {
-
     final GlobalKey<SideMenuState> sideMenuKey = GlobalKey<SideMenuState>();
     return SideMenu(
       background: Colors.teal,
@@ -34,8 +32,7 @@ class HomePage extends StatelessWidget {
               if (ok) {
                 state?.openSideMenu();
 
-               
-              // ignore: dead_code
+                // ignore: dead_code
               } else {
                 state?.openSideMenu();
               }
@@ -48,7 +45,6 @@ class HomePage extends StatelessWidget {
   }
 
   Widget buildMenu(BuildContext context) {
-    
     return SingleChildScrollView(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -77,11 +73,10 @@ class HomePage extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-             Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => const Profile()),
-  );
-
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Profile()),
+              );
             },
             leading: const Icon(
               Icons.person,
@@ -91,7 +86,7 @@ class HomePage extends StatelessWidget {
             title: const Text('Profile'),
           ),
           ListTile(
-            onTap: (){},
+            onTap: () {},
             leading: const Icon(
               Icons.request_quote_rounded,
               size: 20,
@@ -136,7 +131,12 @@ class HomePage extends StatelessWidget {
             title: const Text('Setting'),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Report()),
+              );
+            },
             leading: const Icon(
               Icons.report,
               size: 20,
