@@ -40,6 +40,7 @@ dependencies:
   liquid_ui: ^1.0.0+9
   carousel_slider: ^4.1.1
   gradient_widgets: ^0.6.0
+  extended_image: ^6.2.1
   
 
 

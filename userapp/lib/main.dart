@@ -17,7 +17,7 @@ class Main extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const onBoarding(),
+      home: const HomePage(),
       routes: {
         HomePage.routeName: (context) =>  const HomePage(),
         SignIn.routeName: (context) => const SignIn(),
