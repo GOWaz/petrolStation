@@ -31,10 +31,19 @@ class UserDetails extends StatelessWidget {
           loadUser.fullName!,
           textAlign: TextAlign.center,
         ),
+        flexibleSpace: IconButton(
+          onPressed: () {},
+          icon: const Icon(
+            Icons.edit,
+            color: color1,
+          ),
+        ),
         backgroundColor: color5,
       ),
       body: SafeArea(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(loadUser.fullName!),
             Text(loadUser.nationalNumber!),
