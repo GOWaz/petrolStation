@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:side_navigation/side_navigation.dart';
 import 'package:stationapp/constants.dart';
 import 'package:stationapp/widgets/tank_state.dart';
-
-//enum Status { quarter, half, threeQuarter, full }
+import 'package:stationapp/widgets/user/users_list_view.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -27,6 +26,7 @@ class _MainPageState extends State<MainPage> {
     Center(
       child: Text('Employees'),
     ),
+    UsersListView(),
   ];
   int selectedIndex = 0;
   @override
@@ -39,7 +39,7 @@ class _MainPageState extends State<MainPage> {
           children: [
             SideNavigationBar(
               theme: SideNavigationBarTheme(
-                backgroundColor: color2,
+                backgroundColor: color5,
                 togglerTheme: SideNavigationBarTogglerTheme.standard(),
                 dividerTheme: SideNavigationBarDividerTheme.standard(),
                 itemTheme: const SideNavigationBarItemTheme(
@@ -64,6 +64,10 @@ class _MainPageState extends State<MainPage> {
                 SideNavigationBarItem(
                   icon: Icons.badge,
                   label: 'Employees',
+                ),
+                SideNavigationBarItem(
+                  icon: Icons.group,
+                  label: 'User',
                 )
               ],
               onTap: (index) {

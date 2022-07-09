@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:stationapp/constants.dart';
 
 viewStatus(value) {
@@ -9,7 +10,7 @@ viewStatus(value) {
   } else if (value >= 50 && value <= 75) {
     return Image.asset('images/threeQuarter.png');
   } else {
-    return Image.asset('images/full.jpg');
+    return Image.asset('images/full.png');
   }
 }
 
@@ -25,7 +26,15 @@ viewStatusColor(value) {
   }
 }
 
-viewStatusMessage(value) {
+viewStatusMessage(BuildContext context, value) {
+  final size = MediaQuery.of(context).size;
+
+  var conditionsTextStyle = GoogleFonts.inter(
+    color: color2,
+    fontWeight: FontWeight.bold,
+    fontSize: size.height / 30,
+  );
+
   if (value == 20) {
     return Row(
       children: [
@@ -35,25 +44,36 @@ viewStatusMessage(value) {
           size: 50,
         ),
         Text(
-          ' Warning the Tank Percentage is $value% almost empty!! \n'
-          ' you need to refill the tank.',
+          ' Warning the Fuel Percentage is $value%  '
+          '\n your Tank almost empty!! '
+          '\n you need to refill the Tank.',
           style: conditionsTextStyle,
         ),
       ],
     );
+  } else if (value > 20 && value <= 25) {
+    return Text(
+      'You\'ve used almost three quarter of your Tank!',
+      style: conditionsTextStyle,
+    );
   } else if (value > 25 && value < 50) {
     return Text(
-      'The Tank Percentage is $value% under half of the Tank have been used!',
+      'Under half of your Fuel left in the Tank!',
       style: conditionsTextStyle,
     );
   } else if (value == 50) {
     return Text(
-      'The Tank Percentage is $value% half of the Tank have been used!',
+      'You\'ve used half of your Fuel!',
       style: conditionsTextStyle,
     );
-  } else if (value > 50 && value < 100) {
+  } else if (value > 50 && value <= 75) {
     return Text(
-      'The Tank Percentage is $value% almost full!',
+      'Almost three quarter of Fuel left in your Tank!',
+      style: conditionsTextStyle,
+    );
+  } else if (value > 75 && value < 100) {
+    return Text(
+      'The Fuel Percentage is $value% almost full!',
       style: conditionsTextStyle,
     );
   } else {

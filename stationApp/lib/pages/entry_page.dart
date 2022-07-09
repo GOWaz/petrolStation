@@ -53,7 +53,7 @@ class EntryPage extends StatelessWidget {
                       SizedBox(
                         height: size.height / 4,
                         width: size.width / 4,
-                        child: Image.asset('images/CircleAvatar.jpg'),
+                        child: Image.asset('images/2.jpg'),
                       ),
                       Text(
                         'Welcome !',
