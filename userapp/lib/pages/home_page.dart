@@ -1,8 +1,12 @@
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 import 'package:flutter/material.dart';
 import 'package:userapp/constants.dart';
+import 'package:userapp/pages/map.dart';
+import 'package:userapp/pages/order.dart';
+import 'package:userapp/pages/payment.dart';
 import 'package:userapp/pages/profile.dart';
 import 'package:userapp/pages/report.dart';
+import 'package:userapp/pages/setting.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,7 +23,8 @@ class HomePage extends StatelessWidget {
         // inverse: true,
         menu: buildMenu(context),
         child: Scaffold(
-          body: Container(
+          body:
+           Container(
             constraints: const BoxConstraints.expand(),
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -120,7 +125,7 @@ class HomePage extends StatelessWidget {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  const Profile()),
+                                                  const Order()),
                                         );
                                       },
                                       icon: const Icon(
@@ -202,7 +207,7 @@ class HomePage extends StatelessWidget {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  const Profile()),
+                                              const     Maps()),
                                         );
                                       },
                                       icon: const Icon(
@@ -249,7 +254,7 @@ class HomePage extends StatelessWidget {
                                   ],
                                 ),
                                 const SizedBox(
-                                  height: 10,
+                                  height: 5,
                                 ),
                                 Row(
                                   children: [
@@ -268,10 +273,10 @@ class HomePage extends StatelessWidget {
                                         )
                                       ],
                                     ),
-                                    //const Spacer(),
-                                    const SizedBox(
-                                      width: 70,
-                                    ),
+                                    const Spacer(),
+                                   // const SizedBox(
+                                  //    width: 70,
+                                 //   ),
                                     Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -295,13 +300,13 @@ class HomePage extends StatelessWidget {
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
+                                  children:  [
                                     Container(
                                       width: 200,
-                                      height: 100,
-                                      child: const Image(
+                                      height: 48,
+                                      child:const Image(
                                           image:
-                                              AssetImage('images/queue.jpg')),
+                                              AssetImage('images/queue.jpg',)),
                                     ),
                                   ],
                                 )
@@ -359,7 +364,12 @@ class HomePage extends StatelessWidget {
             title: const Text('Profile'),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Payment()),
+              );
+            },
             leading: const Icon(
               Icons.payment,
               size: 20,
@@ -368,7 +378,12 @@ class HomePage extends StatelessWidget {
             title: const Text('Payment'),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Setting()),
+              );
+            },
             leading: const Icon(
               Icons.settings,
               size: 20,
