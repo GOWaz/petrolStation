@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:side_navigation/side_navigation.dart';
 import 'package:stationapp/constants.dart';
-import 'package:stationapp/widgets/tank_state.dart';
-import 'package:stationapp/widgets/user/users_list_view.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -15,19 +13,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   //list of pages we will handle in the side navigation bar
-  List<Widget> views = const [
-    TankState(),
-    Center(
-      child: Text('Notifications'),
-    ),
-    Center(
-      child: Text('Income Status'),
-    ),
-    Center(
-      child: Text('Employees'),
-    ),
-    UsersListView(),
-  ];
+
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -52,6 +38,10 @@ class _MainPageState extends State<MainPage> {
                 SideNavigationBarItem(
                   icon: Icons.local_gas_station,
                   label: 'Tank State',
+                ),
+                SideNavigationBarItem(
+                  icon: Icons.format_list_numbered,
+                  label: 'Queue State',
                 ),
                 SideNavigationBarItem(
                   icon: Icons.circle_notifications,

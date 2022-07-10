@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stationapp/classes/user.dart';
+import 'package:stationapp/providers/user_providers/user.dart';
 
 class UsersProvider with ChangeNotifier {
   // ignore: prefer_final_fields
@@ -28,5 +28,15 @@ class UsersProvider with ChangeNotifier {
 
   User findById(String id) {
     return _users.firstWhere((user) => user.id == id);
+  }
+
+  void addUser(User user) {
+    _users.add(user);
+    notifyListeners();
+  }
+
+  void deleteUser(id) {
+    _users.removeWhere((user) => user.id == id);
+    notifyListeners();
   }
 }
