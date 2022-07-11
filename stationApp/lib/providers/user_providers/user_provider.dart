@@ -30,13 +30,22 @@ class UsersProvider with ChangeNotifier {
     return _users.firstWhere((user) => user.id == id);
   }
 
+  User findByName(String name) {
+    return _users.firstWhere((user) => user.fullName == name);
+  }
+
   void addUser(User user) {
     _users.add(user);
     notifyListeners();
   }
 
-  void deleteUser(id) {
+  void deleteUserByID(id) {
     _users.removeWhere((user) => user.id == id);
+    notifyListeners();
+  }
+
+  void deleteUserByName(name) {
+    _users.removeWhere((user) => user.fullName == name);
     notifyListeners();
   }
 }

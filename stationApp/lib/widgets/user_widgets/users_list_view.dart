@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:stationapp/classes/user_search.dart';
 import 'package:stationapp/constants.dart';
 import 'package:stationapp/providers/user_providers/user_provider.dart';
 import 'package:stationapp/widgets/user_widgets/user_item.dart';
@@ -19,6 +20,20 @@ class _UsersState extends State<UsersListView> {
 
     return Scaffold(
       backgroundColor: color1,
+      appBar: AppBar(
+        backgroundColor: color5,
+        actions: [
+          IconButton(
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: UserSearch(),
+              );
+            },
+            icon: const Icon(Icons.search),
+          )
+        ],
+      ),
       body: ListView.builder(
         itemCount: user.length,
         itemBuilder: (_, i) => Column(

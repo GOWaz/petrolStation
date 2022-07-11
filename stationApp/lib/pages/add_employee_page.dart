@@ -20,6 +20,13 @@ class AddEmployee extends StatelessWidget {
           ),
         ],
       ),
+      body: Form(
+        child: Column(
+          children: [
+            Container(),
+          ],
+        ),
+      ),
     );
   }
 }

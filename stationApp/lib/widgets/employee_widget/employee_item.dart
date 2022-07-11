@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:stationapp/constants.dart';
+import 'package:stationapp/providers/employee_provider/employee_provider.dart';
 
 // ignore: must_be_immutable
 class EmployeeItemView extends StatelessWidget {
@@ -10,6 +12,7 @@ class EmployeeItemView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final employee = Provider.of<EmployeesProvider>(context);
     return ListTile(
       onTap: () {
         /*Navigator.push(context,
@@ -23,6 +26,7 @@ class EmployeeItemView extends StatelessWidget {
       trailing: IconButton(
         onPressed: () {
           //TODO:show a message to confirm deletion
+          employee.deleteEmployee(id);
         },
         icon: const Icon(
           Icons.delete_forever,

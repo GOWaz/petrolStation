@@ -4,12 +4,15 @@ import 'package:stationapp/constants.dart';
 import 'package:stationapp/providers/user_providers/user.dart';
 import 'package:stationapp/providers/user_providers/user_provider.dart';
 
+enum SelectionView { byID, byName }
+
 // ignore: must_be_immutable
 class UserDetails extends StatelessWidget {
-  String? id;
-  UserDetails({this.id, Key? key}) : super(key: key);
+  SelectionView? viewBy;
+  String? pointer;
+  UserDetails({this.viewBy, this.pointer, Key? key}) : super(key: key);
 
-  static const routeName = '/userViewById';
+  static const routeName = '/userView';
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +26,11 @@ class UserDetails extends StatelessWidget {
       email: '',
       password: '',
     );
-    loadUser = getUser.findById(id!);
+    if (viewBy == SelectionView.byID) {
+      loadUser = getUser.findById(pointer!);
+    } else {
+      loadUser = getUser.findByName(pointer!);
+    }
 
     return Scaffold(
       backgroundColor: color1,
@@ -43,8 +50,13 @@ class UserDetails extends StatelessWidget {
           IconButton(
             onPressed: () {
               //TODO:show a message to confirm deletion
-              getUser.deleteUser(id);
-              Navigator.pop(context);
+              if (viewBy == SelectionView.byID) {
+                getUser.deleteUserByID(pointer);
+                Navigator.pop(context);
+              } else {
+                getUser.deleteUserByName(pointer);
+                Navigator.pop(context);
+              }
             },
             icon: const Icon(
               Icons.delete_forever,

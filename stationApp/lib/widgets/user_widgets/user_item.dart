@@ -13,8 +13,13 @@ class UserItemView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => UserDetails(id: id)));
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                UserDetails(viewBy: SelectionView.byID, pointer: id),
+          ),
+        );
       },
       iconColor: color5,
       textColor: Colors.black,
