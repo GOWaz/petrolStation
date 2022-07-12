@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:stationapp/classes/employee_search.dart';
 import 'package:stationapp/constants.dart';
 import 'package:stationapp/pages/add_employee_page.dart';
 import 'package:stationapp/providers/employee_provider/employee_provider.dart';
@@ -20,6 +21,20 @@ class _EmployeesListViewState extends State<EmployeesListView> {
 
     return Scaffold(
       backgroundColor: color1,
+      appBar: AppBar(
+        backgroundColor: color5,
+        actions: [
+          IconButton(
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: EmployeeSearch(),
+              );
+            },
+            icon: const Icon(Icons.search),
+          )
+        ],
+      ),
       body: ListView.builder(
         itemCount: employees.length,
         itemBuilder: (_, i) => Column(

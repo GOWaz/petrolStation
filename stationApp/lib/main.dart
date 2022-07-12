@@ -6,7 +6,7 @@ import 'package:stationapp/pages/mani_page.dart';
 import 'package:stationapp/pages/user_details_page.dart';
 import 'package:stationapp/providers/employee_provider/employee_provider.dart';
 import 'package:stationapp/providers/tank.dart';
-import 'package:stationapp/providers/user_providers/user_provider.dart';
+import 'package:stationapp/providers/user_provider/user_provider.dart';
 
 void main() {
   runApp(const MyApp());

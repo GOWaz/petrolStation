@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stationapp/constants.dart';
-import 'package:stationapp/providers/user_providers/user.dart';
-import 'package:stationapp/providers/user_providers/user_provider.dart';
+import 'package:stationapp/providers/user_provider/user.dart';
+import 'package:stationapp/providers/user_provider/user_provider.dart';
 
 enum SelectionView { byID, byName }
 

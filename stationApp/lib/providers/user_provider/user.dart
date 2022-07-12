@@ -14,6 +14,7 @@ class User with ChangeNotifier {
   String? passengerNumber;
   String? carNumber;
 
+  @override
   User({
     required this.id,
     required this.fullName,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stationapp/providers/user_providers/user.dart';
+import 'package:stationapp/providers/user_provider/user.dart';
 
 class UsersProvider with ChangeNotifier {
   // ignore: prefer_final_fields
