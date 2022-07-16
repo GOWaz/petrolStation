@@ -44,10 +44,6 @@ class _MainPageState extends State<MainPage> {
                   label: 'Queue State',
                 ),
                 SideNavigationBarItem(
-                  icon: Icons.circle_notifications,
-                  label: 'Notifications',
-                ),
-                SideNavigationBarItem(
                   icon: Icons.trending_up,
                   label: 'Income Status',
                 ),
@@ -58,7 +54,11 @@ class _MainPageState extends State<MainPage> {
                 SideNavigationBarItem(
                   icon: Icons.group,
                   label: 'User',
-                )
+                ),
+                SideNavigationBarItem(
+                  icon: Icons.circle_notifications,
+                  label: 'Notifications',
+                ),
               ],
               onTap: (index) {
                 setState(() {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:stationapp/constants.dart';
 import 'package:stationapp/providers/user_provider/user.dart';
@@ -49,14 +50,51 @@ class UserDetails extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              //TODO:show a message to confirm deletion
-              if (viewBy == SelectionView.byID) {
-                getUser.deleteUserByID(pointer);
-                Navigator.pop(context);
-              } else {
-                getUser.deleteUserByName(pointer);
-                Navigator.pop(context);
-              }
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Row(
+                    children: const [
+                      Icon(
+                        Icons.warning,
+                        color: Colors.red,
+                      ),
+                      Text(
+                        'Warning',
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  content: Text(
+                    'Are you sure you want to remove ${loadUser.fullName}?'
+                    '\nPress "Ok" to remove ${loadUser.fullName}.'
+                    '\nPress "Cancel" to go back.',
+                    style: GoogleFonts.inter(color: color5),
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text('Cancel'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        if (viewBy == SelectionView.byID) {
+                          getUser.deleteUserByID(pointer);
+                          Navigator.pop(context);
+                        } else {
+                          getUser.deleteUserByName(pointer);
+                          Navigator.pop(context);
+                        }
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Ok'),
+                    ),
+                  ],
+                ),
+              );
             },
             icon: const Icon(
               Icons.delete_forever,

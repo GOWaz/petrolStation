@@ -15,9 +15,21 @@ class EmployeesProvider with ChangeNotifier {
     return [..._employees];
   }
 
+  Employee findById(String id) {
+    return _employees.firstWhere((emp) => emp.id == id);
+  }
+
   void addEmployee(Employee emp) {
     _employees.add(emp);
     notifyListeners();
+  }
+
+  void updateEmployee(String id, Employee updatedEmployee) {
+    final employeeIndex = _employees.indexWhere((emp) => emp.id == id);
+    if (employeeIndex >= 0) {
+      _employees[employeeIndex] = updatedEmployee;
+      notifyListeners();
+    }
   }
 
   void deleteEmployee(id) {

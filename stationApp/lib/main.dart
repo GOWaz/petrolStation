@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stationapp/pages/add_employee_page.dart';
+import 'package:stationapp/pages/employee_pages/add_employee_page.dart';
+import 'package:stationapp/pages/employee_pages/edit_employee.dart';
 import 'package:stationapp/pages/entry_page.dart';
 import 'package:provider/provider.dart';
 import 'package:stationapp/pages/mani_page.dart';
@@ -19,11 +20,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (BuildContext context) => Tank()),
         ChangeNotifierProvider(
-            create: (BuildContext context) => UsersProvider()),
+          create: (BuildContext context) => Tank(),
+        ),
         ChangeNotifierProvider(
-            create: (BuildContext context) => EmployeesProvider()),
+          create: (BuildContext context) => UsersProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => EmployeesProvider(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -32,6 +37,7 @@ class MyApp extends StatelessWidget {
           MainPage.routeName: (ctx) => const MainPage(),
           UserDetails.routeName: (ctx) => UserDetails(),
           AddEmployee.routeName: (ctx) => const AddEmployee(),
+          EditEmployee.routeName: (ctx) => const EditEmployee(),
         },
       ),
     );

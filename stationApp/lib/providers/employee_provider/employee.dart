@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Employee with ChangeNotifier {
-  String? id;
-  String? fullName;
-  String? job;
+  final String id;
+  final String fullName;
+  final String job;
 
   @override
   Employee({

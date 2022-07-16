@@ -9,13 +9,13 @@ List<Widget> views = const [
     child: Text('Queue State'),
   ),
   Center(
-    child: Text('Notifications'),
-  ),
-  Center(
     child: Text('Income Status'),
   ),
   EmployeesListView(),
   UsersListView(),
+  Center(
+    child: Text('Notifications'),
+  ),
 ];
 
 const color1 = Color(0xFFFFDA6A);

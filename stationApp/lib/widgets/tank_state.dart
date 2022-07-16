@@ -13,12 +13,23 @@ class TankState extends StatefulWidget {
 }
 
 class _TankStateState extends State<TankState> {
+  var _isInit = true;
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      final tankPercentage = Provider.of<Tank>(context);
+      tankPercentage.setPercentage();
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
     final tankPercentage = Provider.of<Tank>(context);
-    tankPercentage.setPercentage();
     int percentage = tankPercentage.percentage;
 
     return Padding(

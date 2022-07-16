@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stationapp/classes/employee_search.dart';
 import 'package:stationapp/constants.dart';
-import 'package:stationapp/pages/add_employee_page.dart';
+import 'package:stationapp/pages/employee_pages/add_employee_page.dart';
 import 'package:stationapp/providers/employee_provider/employee_provider.dart';
 import 'package:stationapp/widgets/employee_widget/employee_item.dart';
 
