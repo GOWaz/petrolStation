@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:stationapp/constants.dart';
 import 'package:stationapp/providers/employee_provider/employee.dart';
@@ -37,48 +36,24 @@ class _AddEmployeeState extends State<AddEmployee> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      //backgroundColor: color1,
+      backgroundColor: color1,
       appBar: AppBar(
         backgroundColor: color5,
         title: const Text('Hire an Employee'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              _onSave();
-            },
-            icon: const Icon(
-              Icons.check_box,
-              color: color1,
-            ),
-          ),
-        ],
       ),
       body: Form(
         key: _form,
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              SizedBox(
-                width: size.width / 4,
-                child: Material(
-                  elevation: 20.0,
-                  shadowColor: color1,
+          child: SizedBox(
+            width: size.width / 4,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Material(
+                  elevation: 40.0,
+                  shadowColor: Colors.black,
                   child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Employee ID',
-                      hintStyle: GoogleFonts.inter(
-                        fontSize: 20,
-                        color: color1,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      filled: true,
-                      fillColor: color5,
-                      border: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(0)),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
+                    decoration: fieldDecoration('Employee ID'),
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'please enter an ID';
@@ -97,27 +72,11 @@ class _AddEmployeeState extends State<AddEmployee> {
                     textInputAction: TextInputAction.next,
                   ),
                 ),
-              ),
-              SizedBox(
-                width: size.width / 4,
-                child: Material(
-                  elevation: 20.0,
-                  shadowColor: color1,
+                Material(
+                  elevation: 40.0,
+                  shadowColor: Colors.black,
                   child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Employee Full Name',
-                      hintStyle: GoogleFonts.inter(
-                        fontSize: 20,
-                        color: color1,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      filled: true,
-                      fillColor: color5,
-                      border: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(0)),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
+                    decoration: fieldDecoration('Employee Full Name'),
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'please enter a name';
@@ -136,27 +95,11 @@ class _AddEmployeeState extends State<AddEmployee> {
                     textInputAction: TextInputAction.next,
                   ),
                 ),
-              ),
-              SizedBox(
-                width: size.width / 4,
-                child: Material(
-                  elevation: 20.0,
-                  shadowColor: color1,
+                Material(
+                  elevation: 40.0,
+                  shadowColor: Colors.black,
                   child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Employee Jop',
-                      hintStyle: GoogleFonts.inter(
-                        fontSize: 20,
-                        color: color1,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      filled: true,
-                      fillColor: color5,
-                      border: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(0)),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
+                    decoration: fieldDecoration('Employee Jop'),
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'please enter a job';
@@ -173,20 +116,16 @@ class _AddEmployeeState extends State<AddEmployee> {
                       });
                     },
                     textInputAction: TextInputAction.done,
-                    onFieldSubmitted: (_) {
-                      _onSave();
-                    },
+                    onFieldSubmitted: (_) => _onSave(),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _onSave();
-        },
+        onPressed: () => _onSave(),
         backgroundColor: color5,
         child: const Icon(Icons.check),
       ),

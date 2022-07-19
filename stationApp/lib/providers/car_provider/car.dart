@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 
 class Car with ChangeNotifier {
-  String? id;
-  String? carName;
-  String? carNumber;
-  String? owner;
-  String? type;
-  String? category;
-  int? amount;
-  DateTime? manufacturingYear;
-  String? engineNumber;
-  String? passengersNumber;
+  final String id;
+  final String ownerId;
+  final String carName;
+  final String carNumber;
+  final String owner;
+  final String type;
+  final String category;
+  final int amount;
+  final DateTime manufacturingYear;
+  final String engineNumber;
+  final int passengersNumber;
 
   @override
   Car({
     required this.id,
+    required this.ownerId,
     required this.carName,
     required this.carNumber,
     required this.owner,

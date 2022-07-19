@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:stationapp/pages/add_car.dart';
 import 'package:stationapp/pages/employee_pages/add_employee_page.dart';
 import 'package:stationapp/pages/employee_pages/edit_employee.dart';
 import 'package:stationapp/pages/entry_page.dart';
 import 'package:provider/provider.dart';
 import 'package:stationapp/pages/mani_page.dart';
 import 'package:stationapp/pages/user_details_page.dart';
+import 'package:stationapp/providers/bill_provider/bill_provider.dart';
+import 'package:stationapp/providers/car_provider/car_provider.dart';
 import 'package:stationapp/providers/employee_provider/employee_provider.dart';
 import 'package:stationapp/providers/tank.dart';
 import 'package:stationapp/providers/user_provider/user_provider.dart';
@@ -29,6 +32,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (BuildContext context) => EmployeesProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => BillsProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => CarsProvider(),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -38,6 +47,7 @@ class MyApp extends StatelessWidget {
           UserDetails.routeName: (ctx) => UserDetails(),
           AddEmployee.routeName: (ctx) => const AddEmployee(),
           EditEmployee.routeName: (ctx) => const EditEmployee(),
+          AddCar.routeName: (ctx) => const AddCar(),
         },
       ),
     );

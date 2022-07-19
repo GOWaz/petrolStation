@@ -36,8 +36,8 @@ class UserSearch extends SearchDelegate {
     List<String> matchQuery = [];
     List<User> user = getUser(context);
     for (var item in user) {
-      if (item.fullName!.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(item.fullName!);
+      if (item.fullName.toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(item.fullName);
       }
     }
     return ListView.builder(
@@ -56,8 +56,8 @@ class UserSearch extends SearchDelegate {
     List<String> matchQuery = [];
     List<User> prod = getUser(context);
     for (var item in prod) {
-      if (item.fullName!.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(item.fullName!);
+      if (item.fullName.toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(item.fullName);
       }
     }
     return ListView.builder(

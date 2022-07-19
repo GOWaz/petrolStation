@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 
 class User with ChangeNotifier {
-  String? id;
-  String? fullName;
-  String? nationalNumber;
-  String? phoneNumber;
-  String? email;
-  String? password;
-  String? nameCar;
-  String? type;
-  String? category;
-  String? engineNumber;
-  String? passengerNumber;
-  String? carNumber;
+  final String id;
+  final String fullName;
+  final String nationalNumber;
+  final String phoneNumber;
+  final String email;
+  final String password;
 
   @override
   User({

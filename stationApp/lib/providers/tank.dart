@@ -21,7 +21,7 @@ class Tank with ChangeNotifier {
     if (_amounts < 20) {
       _amounts = 20;
     }
-    notifyListeners();
+    //notifyListeners();
   }
 
   int get percentage {
