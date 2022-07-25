@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
-import 'home_page.dart';
+import 'home page/home_page.dart';
 
 class Setting extends StatelessWidget {
   const Setting({Key? key}) : super(key: key);

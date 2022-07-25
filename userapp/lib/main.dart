@@ -1,9 +1,9 @@
-import 'package:userapp/pages/home_page.dart';
+import 'package:userapp/pages/home%20page/home_page.dart';
 import 'package:userapp/pages/map.dart';
 import 'package:userapp/pages/on_boarding.dart';
-import 'package:userapp/pages/order.dart';
-import 'package:userapp/pages/payment.dart';
-import 'package:userapp/pages/profile.dart';
+import 'package:userapp/pages/Order%20Page/order.dart';
+import 'package:userapp/pages/Payment/payment.dart';
+import 'package:userapp/pages/Profile%20Page/profile.dart';
 import 'package:userapp/pages/report.dart';
 import 'package:userapp/pages/setting.dart';
 import 'package:userapp/pages/sign_in.dart';
@@ -21,7 +21,7 @@ class Main extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const onBoarding(),
+      home: const HomePage(),
       routes: {
         HomePage.routeName: (context) =>  const HomePage(),
         SignIn.routeName: (context) => const SignIn(),

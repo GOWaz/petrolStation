@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../constants.dart';
-import 'home_page.dart';
+import 'home page/home_page.dart';
 
 class Maps extends StatelessWidget {
   const Maps({Key? key}) : super(key: key);
@@ -24,12 +24,8 @@ static const routeName = '/Maps';
             icon: const Icon(Icons.arrow_back)),
         ),
         body: Column(
-          children: [
-            Row(
-              children:const [
-                Text('')
-              ],
-            )
+          children: const [
+           
           ],
         ),
     );
