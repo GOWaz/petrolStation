@@ -3,7 +3,7 @@ import 'package:userapp/pages/map.dart';
 import '../../constants.dart';
 
 class MapContainer extends StatelessWidget {
-  
+
   const MapContainer({Key? key}) : super(key: key);
 
   @override
