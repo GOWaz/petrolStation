@@ -23,17 +23,16 @@ class Main extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: const HomePage(),
       routes: {
-        HomePage.routeName: (context) =>  const HomePage(),
+        HomePage.routeName: (context) => const HomePage(),
         SignIn.routeName: (context) => const SignIn(),
         SignUp.routeName: (context) => const SignUp(),
         onBoarding.routeName: (context) => const onBoarding(),
-       Profile.routeName: (context) =>  const Profile(),
-        Report.routeName: (context) =>  const Report(),
-         Setting.routeName: (context) =>  const Setting(),
-        Order.routeName: (context) =>  const Order(),
-        Maps.routeName: (context) =>  const Maps(),
-        Payment.routeName: (context) =>  const Payment(),
-
+        Profile.routeName: (context) => const Profile(),
+        Report.routeName: (context) => const Report(),
+        Setting.routeName: (context) => const Setting(),
+        Order.routeName: (context) => const Order(),
+        Maps.routeName: (context) => const Maps(),
+        Payment.routeName: (context) => const Payment(),
       },
     );
   }
