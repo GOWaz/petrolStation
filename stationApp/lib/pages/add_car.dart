@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:stationapp/constants.dart';
 import 'package:stationapp/providers/car_provider/car.dart';
 import 'package:stationapp/providers/car_provider/car_provider.dart';
-import 'package:intl/intl.dart';
 
 class AddCar extends StatefulWidget {
   const AddCar({Key? key}) : super(key: key);
@@ -24,17 +23,14 @@ class _AddCarState extends State<AddCar> {
   }
 
   var _addedCar = Car(
-      id: '',
-      ownerId: '',
-      carName: '',
-      carNumber: '',
-      owner: '',
-      type: '',
-      category: '',
-      amount: 0,
-      manufacturingYear: DateTime.now(),
-      engineNumber: '',
-      passengersNumber: 0);
+    id: '',
+    ownerId: '',
+    carName: '',
+    carNumber: '',
+    owner: '',
+    category: '',
+    amount: 0,
+  );
 
   final _form = GlobalKey<FormState>();
 
@@ -50,13 +46,9 @@ class _AddCarState extends State<AddCar> {
           ownerId: userInfo[0], //_addedCar.ownerId,
           carName: _addedCar.carName,
           carNumber: _addedCar.carNumber,
-          owner: userInfo[1], //_addedCar.owner,
-          type: _addedCar.type,
+          owner: userInfo[1],
           category: _addedCar.category,
           amount: _addedCar.amount,
-          manufacturingYear: _addedCar.manufacturingYear,
-          engineNumber: _addedCar.engineNumber,
-          passengersNumber: _addedCar.passengersNumber,
         );
       }
       _isInit = false;
@@ -123,12 +115,8 @@ class _AddCarState extends State<AddCar> {
                           carName: _addedCar.carName,
                           carNumber: _addedCar.carNumber,
                           owner: _addedCar.owner,
-                          type: _addedCar.type,
                           category: _addedCar.category,
                           amount: _addedCar.amount,
-                          manufacturingYear: _addedCar.manufacturingYear,
-                          engineNumber: _addedCar.engineNumber,
-                          passengersNumber: _addedCar.passengersNumber,
                         );
                       }),
                     ),
@@ -152,12 +140,8 @@ class _AddCarState extends State<AddCar> {
                           carName: value,
                           carNumber: _addedCar.carNumber,
                           owner: _addedCar.owner,
-                          type: _addedCar.type,
                           category: _addedCar.category,
                           amount: _addedCar.amount,
-                          manufacturingYear: _addedCar.manufacturingYear,
-                          engineNumber: _addedCar.engineNumber,
-                          passengersNumber: _addedCar.passengersNumber,
                         );
                       }),
                     ),
@@ -181,91 +165,10 @@ class _AddCarState extends State<AddCar> {
                           carName: _addedCar.carName,
                           carNumber: value,
                           owner: _addedCar.owner,
-                          type: _addedCar.type,
                           category: _addedCar.category,
                           amount: _addedCar.amount,
-                          manufacturingYear: _addedCar.manufacturingYear,
-                          engineNumber: _addedCar.engineNumber,
-                          passengersNumber: _addedCar.passengersNumber,
                         );
                       }),
-                    ),
-                  ),
-                  Material(
-                    elevation: 40.0,
-                    shadowColor: Colors.black,
-                    child: TextFormField(
-                      decoration: fieldDecoration('Type'),
-                      textInputAction: TextInputAction.next,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'You must enter car type';
-                        }
-                        return null;
-                      },
-                      onChanged: (value) => setState(() {
-                        _addedCar = Car(
-                          id: _addedCar.id,
-                          ownerId: _addedCar.ownerId,
-                          carName: _addedCar.carName,
-                          carNumber: _addedCar.carNumber,
-                          owner: _addedCar.owner,
-                          type: value,
-                          category: _addedCar.category,
-                          amount: _addedCar.amount,
-                          manufacturingYear: _addedCar.manufacturingYear,
-                          engineNumber: _addedCar.engineNumber,
-                          passengersNumber: _addedCar.passengersNumber,
-                        );
-                      }),
-                    ),
-                  ),
-                  /*SizedBox(
-                    width: size.width / 4,
-                  ),*/
-                  Material(
-                    elevation: 40.0,
-                    shadowColor: Colors.black,
-                    child: TextFormField(
-                      decoration: fieldDecoration('Manufacturing Year'),
-                      textInputAction: TextInputAction.next,
-                      controller: _dateController,
-                      readOnly: true,
-                      onTap: () async {
-                        DateTime? pickedDate = await showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime(1990),
-                            lastDate: DateTime(2040));
-                        if (pickedDate != null) {
-                          String formattedDate =
-                              DateFormat('yyyy-MM-dd').format(pickedDate);
-                          setState(() {
-                            _dateController.text = formattedDate;
-                          });
-                        }
-                      },
-                      onSaved: (value) => setState(() {
-                        _addedCar = Car(
-                          id: _addedCar.id,
-                          ownerId: _addedCar.ownerId,
-                          carName: _addedCar.carName,
-                          carNumber: _addedCar.carNumber,
-                          owner: _addedCar.owner,
-                          type: _addedCar.type,
-                          category: _addedCar.category,
-                          amount: _addedCar.amount,
-                          manufacturingYear: DateTime.parse(value!),
-                          engineNumber: _addedCar.engineNumber,
-                          passengersNumber: _addedCar.passengersNumber,
-                        );
-                      }),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Must Pick a Date';
-                        }
-                        return null;
-                      },
                     ),
                   ),
                   Material(
@@ -287,12 +190,8 @@ class _AddCarState extends State<AddCar> {
                           carName: _addedCar.carName,
                           carNumber: _addedCar.carNumber,
                           owner: _addedCar.owner,
-                          type: _addedCar.type,
                           category: value,
                           amount: _addedCar.amount,
-                          manufacturingYear: _addedCar.manufacturingYear,
-                          engineNumber: _addedCar.engineNumber,
-                          passengersNumber: _addedCar.passengersNumber,
                         );
                       }),
                     ),
@@ -302,7 +201,6 @@ class _AddCarState extends State<AddCar> {
                     shadowColor: Colors.black,
                     child: TextFormField(
                       decoration: fieldDecoration('Fuel amount'),
-                      textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.number,
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -323,70 +221,8 @@ class _AddCarState extends State<AddCar> {
                           carName: _addedCar.carName,
                           carNumber: _addedCar.carNumber,
                           owner: _addedCar.owner,
-                          type: _addedCar.type,
                           category: _addedCar.category,
                           amount: int.parse(value),
-                          manufacturingYear: _addedCar.manufacturingYear,
-                          engineNumber: _addedCar.engineNumber,
-                          passengersNumber: _addedCar.passengersNumber,
-                        );
-                      }),
-                    ),
-                  ),
-                  Material(
-                    elevation: 40.0,
-                    shadowColor: Colors.black,
-                    child: TextFormField(
-                      decoration: fieldDecoration('Engine number'),
-                      textInputAction: TextInputAction.next,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'You must enter car Engine number';
-                        }
-                        return null;
-                      },
-                      onChanged: (value) => setState(() {
-                        _addedCar = Car(
-                          id: _addedCar.id,
-                          ownerId: _addedCar.ownerId,
-                          carName: _addedCar.carName,
-                          carNumber: _addedCar.carNumber,
-                          owner: _addedCar.owner,
-                          type: _addedCar.type,
-                          category: _addedCar.category,
-                          amount: _addedCar.amount,
-                          manufacturingYear: _addedCar.manufacturingYear,
-                          engineNumber: value,
-                          passengersNumber: _addedCar.passengersNumber,
-                        );
-                      }),
-                    ),
-                  ),
-                  Material(
-                    elevation: 40.0,
-                    shadowColor: Colors.black,
-                    child: TextFormField(
-                      decoration: fieldDecoration('Passengers Number'),
-                      keyboardType: TextInputType.number,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'You must enter car Passengers Number';
-                        }
-                        return null;
-                      },
-                      onChanged: (value) => setState(() {
-                        _addedCar = Car(
-                          id: _addedCar.id,
-                          ownerId: _addedCar.ownerId,
-                          carName: _addedCar.carName,
-                          carNumber: _addedCar.carNumber,
-                          owner: _addedCar.owner,
-                          type: _addedCar.type,
-                          category: _addedCar.category,
-                          amount: _addedCar.amount,
-                          manufacturingYear: _addedCar.manufacturingYear,
-                          engineNumber: _addedCar.engineNumber,
-                          passengersNumber: int.parse(value),
                         );
                       }),
                       textInputAction: TextInputAction.done,

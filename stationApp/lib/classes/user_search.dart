@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:stationapp/pages/user_details_page.dart';
+import 'package:stationapp/pages/user_pages/user_details_page.dart';
 import 'package:stationapp/providers/user_provider/user.dart';
 import 'package:stationapp/providers/user_provider/user_provider.dart';
 

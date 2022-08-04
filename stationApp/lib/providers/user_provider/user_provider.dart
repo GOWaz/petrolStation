@@ -48,4 +48,12 @@ class UsersProvider with ChangeNotifier {
     _users.removeWhere((user) => user.fullName == name);
     notifyListeners();
   }
+
+  void updateUser(String id, User updatedUser) {
+    final userIndex = _users.indexWhere((user) => user.id == id);
+    if (userIndex >= 0) {
+      _users[userIndex] = updatedUser;
+      notifyListeners();
+    }
+  }
 }

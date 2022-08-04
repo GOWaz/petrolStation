@@ -6,9 +6,8 @@ class EmployeesProvider with ChangeNotifier {
   List<Employee> _employees = [
     Employee(id: '1', fullName: 'gow', job: 'job'),
     Employee(id: '2', fullName: 'Obama', job: 'job'),
-    Employee(id: '3', fullName: 'Abd', job: 'job'),
-    Employee(id: '4', fullName: 'Malek', job: 'job'),
-    Employee(id: '5', fullName: 'Rana', job: 'job'),
+    Employee(id: '3', fullName: 'Malek', job: 'job'),
+    Employee(id: '4', fullName: 'Rana', job: 'job'),
   ];
 
   List<Employee> get employees {

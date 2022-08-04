@@ -16,7 +16,6 @@ class AddEmployee extends StatefulWidget {
 class _AddEmployeeState extends State<AddEmployee> {
   final _form = GlobalKey<FormState>();
 
-  // ignore: no_leading_underscores_for_local_identifiers
   var _addedEmployee = Employee(id: '', fullName: '', job: '');
 
   void _onSave() {

@@ -10,12 +10,8 @@ class CarsProvider with ChangeNotifier {
       carName: '',
       carNumber: '',
       owner: '',
-      type: '',
       category: '',
       amount: 0,
-      manufacturingYear: DateTime.now(),
-      engineNumber: '',
-      passengersNumber: 0,
     ),
   ];
 
