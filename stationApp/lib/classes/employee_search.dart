@@ -64,15 +64,7 @@ class EmployeeSearch extends SearchDelegate {
         var result = matchQuery[i];
         return GestureDetector(
           child: ListTile(
-            /*onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => UserDetails(
-                      viewBy: SelectionView.byName, pointer: result),
-                ),
-              );
-            },*/
+            onTap: () {},
             title: Text(result),
           ),
         );

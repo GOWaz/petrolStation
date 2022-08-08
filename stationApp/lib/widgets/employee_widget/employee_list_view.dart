@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stationapp/classes/employee_search.dart';
@@ -14,6 +16,72 @@ class EmployeesListView extends StatefulWidget {
 }
 
 class _EmployeesListViewState extends State<EmployeesListView> {
+  Future<void> _updateEmployeesList(BuildContext context) async {
+    try {
+      await Provider.of<EmployeesProvider>(context, listen: false)
+          .fetchEmployees();
+    } catch (error) {
+      print(error);
+      await showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text('An error occurred!'),
+          content: const Text('Something went wrong.'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Okay'),
+              onPressed: () {
+                Navigator.of(ctx).pop();
+              },
+            )
+          ],
+        ),
+      );
+    }
+  }
+
+  var _isInit = true;
+  var _isLoading = false;
+
+  @override
+  Future<void> didChangeDependencies() async {
+    if (_isInit) {
+      setState(() {
+        _isLoading = true;
+      });
+      try {
+        await Provider.of<EmployeesProvider>(context)
+            .fetchEmployees(); /*.then((_) {
+          setState(() {
+            _isLoading = false;
+          });
+        });*/
+      } catch (error) {
+        //print(error);
+        await showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            title: const Text('An error occurred!'),
+            content: const Text('Something went wrong.'),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('Okay'),
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                },
+              )
+            ],
+          ),
+        );
+      }
+    }
+    setState(() {
+      _isLoading = false;
+    });
+    _isInit = false;
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     final getEmployee = Provider.of<EmployeesProvider>(context);
@@ -32,21 +100,31 @@ class _EmployeesListViewState extends State<EmployeesListView> {
               );
             },
             icon: const Icon(Icons.search),
-          )
+          ),
+          IconButton(
+            onPressed: () => setState(() {
+              _updateEmployeesList(context);
+            }),
+            icon: const Icon(Icons.refresh),
+          ),
         ],
       ),
-      body: ListView.builder(
-        itemCount: employees.length,
-        itemBuilder: (_, i) => Column(
-          children: [
-            EmployeeItemView(
-              id: employees[i].id,
-              name: employees[i].fullName,
-              job: employees[i].job,
+      body: _isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
             )
-          ],
-        ),
-      ),
+          : ListView.builder(
+              itemCount: employees.length,
+              itemBuilder: (_, i) => Column(
+                children: [
+                  EmployeeItemView(
+                    id: employees[i].id,
+                    name: employees[i].fullName,
+                    job: employees[i].job,
+                  )
+                ],
+              ),
+            ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).pushNamed(AddEmployee.routeName);

@@ -23,6 +23,7 @@ class _EditEmployeeState extends State<EditEmployee> {
   var _editedEmployee = Employee(id: '', fullName: '', job: '');
 
   var _isInit = true;
+  var _isLoading = false;
 
   @override
   void didChangeDependencies() {
@@ -49,17 +50,42 @@ class _EditEmployeeState extends State<EditEmployee> {
     super.dispose();
   }
 
-  void _onSave() {
+  Future<void> _onSave() async {
     // ignore: no_leading_underscores_for_local_identifiers
     final _isValidated = _form.currentState!.validate();
     if (!_isValidated) {
       return;
     }
     _form.currentState!.save();
-    if (_editedEmployee.id != '') {
-      Provider.of<EmployeesProvider>(context, listen: false)
-          .updateEmployee(_editedEmployee.id, _editedEmployee);
+    setState(() {
+      _isLoading = true;
+    });
+    try {
+      if (_editedEmployee.id != '') {
+        await Provider.of<EmployeesProvider>(context, listen: false)
+            .updateEmployee(_editedEmployee.id, _editedEmployee);
+      }
+    } catch (error) {
+      await showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text('An error occurred!'),
+          content: const Text('Something went wrong.'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Okay'),
+              onPressed: () {
+                Navigator.of(ctx).pop();
+              },
+            )
+          ],
+        ),
+      );
     }
+    setState(() {
+      _isLoading = false;
+    });
+    // ignore: use_build_context_synchronously
     Navigator.of(context).pop();
   }
 
@@ -73,92 +99,72 @@ class _EditEmployeeState extends State<EditEmployee> {
         backgroundColor: color5,
         title: const Text('Hire an Employee'),
       ),
-      body: Form(
-        key: _form,
-        child: Center(
-          child: SizedBox(
-            width: size.width / 4,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Material(
-                  elevation: 40.0,
-                  shadowColor: Colors.black,
-                  child: TextFormField(
-                    decoration: fieldDecoration('Employee ID'),
-                    controller: _idController,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'please enter an ID';
-                      }
-                      return null;
-                    },
-                    onChanged: (value) {
-                      setState(() {
-                        _editedEmployee = Employee(
-                          id: value,
-                          fullName: _editedEmployee.fullName,
-                          job: _editedEmployee.job,
-                        );
-                      });
-                    },
-                    textInputAction: TextInputAction.next,
+      body: _isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : Form(
+              key: _form,
+              child: Center(
+                child: SizedBox(
+                  width: size.width / 4,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Material(
+                        elevation: 40.0,
+                        shadowColor: Colors.black,
+                        child: TextFormField(
+                          decoration: fieldDecoration('Employee Full Name'),
+                          controller: _nameController,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'please enter a name';
+                            }
+                            return null;
+                          },
+                          onChanged: (value) {
+                            setState(() {
+                              _editedEmployee = Employee(
+                                id: _editedEmployee.id,
+                                fullName: value,
+                                job: _editedEmployee.job,
+                              );
+                            });
+                          },
+                          textInputAction: TextInputAction.next,
+                        ),
+                      ),
+                      Material(
+                        elevation: 40.0,
+                        shadowColor: Colors.black,
+                        child: TextFormField(
+                          decoration: fieldDecoration('Employee Jop'),
+                          controller: _jobController,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'please enter a job';
+                            }
+                            return null;
+                          },
+                          onChanged: (value) {
+                            setState(() {
+                              _editedEmployee = Employee(
+                                id: _editedEmployee.id,
+                                fullName: _editedEmployee.fullName,
+                                job: value,
+                              );
+                            });
+                          },
+                          textInputAction: TextInputAction.done,
+                          onFieldSubmitted: (_) => _onSave(),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                Material(
-                  elevation: 40.0,
-                  shadowColor: Colors.black,
-                  child: TextFormField(
-                    decoration: fieldDecoration('Employee Full Name'),
-                    controller: _nameController,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'please enter a name';
-                      }
-                      return null;
-                    },
-                    onChanged: (value) {
-                      setState(() {
-                        _editedEmployee = Employee(
-                          id: _editedEmployee.id,
-                          fullName: value,
-                          job: _editedEmployee.job,
-                        );
-                      });
-                    },
-                    textInputAction: TextInputAction.next,
-                  ),
-                ),
-                Material(
-                  elevation: 40.0,
-                  shadowColor: Colors.black,
-                  child: TextFormField(
-                    decoration: fieldDecoration('Employee Jop'),
-                    controller: _jobController,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'please enter a job';
-                      }
-                      return null;
-                    },
-                    onChanged: (value) {
-                      setState(() {
-                        _editedEmployee = Employee(
-                          id: _editedEmployee.id,
-                          fullName: _editedEmployee.fullName,
-                          job: value,
-                        );
-                      });
-                    },
-                    textInputAction: TextInputAction.done,
-                    onFieldSubmitted: (_) => _onSave(),
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-        ),
-      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _onSave(),
         backgroundColor: color5,
