@@ -2,27 +2,26 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:stationapp/classes/employee_search.dart';
 import 'package:stationapp/constants.dart';
-import 'package:stationapp/pages/employee_pages/add_employee_page.dart';
-import 'package:stationapp/providers/employee_provider/employee_provider.dart';
-import 'package:stationapp/widgets/employee_widget/employee_item.dart';
+import 'package:stationapp/providers/user_provider/users_received_message_provider.dart';
+import 'package:stationapp/widgets/queue_item.dart';
 
-class EmployeesListView extends StatefulWidget {
-  const EmployeesListView({Key? key}) : super(key: key);
+class ReceivedMessagePage extends StatefulWidget {
+  const ReceivedMessagePage({Key? key}) : super(key: key);
 
   @override
-  State<EmployeesListView> createState() => _EmployeesListViewState();
+  State<ReceivedMessagePage> createState() => _ReceivedMessagePageState();
 }
 
-class _EmployeesListViewState extends State<EmployeesListView> {
-  Future<void> _updateEmployeesList(BuildContext context) async {
+class _ReceivedMessagePageState extends State<ReceivedMessagePage> {
+  var check = false;
+  Future<void> _updateUserList(BuildContext context) async {
     setState(() {
       _isLoading = true;
     });
     try {
-      await Provider.of<EmployeesProvider>(context, listen: false)
-          .fetchEmployees();
+      await Provider.of<ReceivedMessageProvider>(context, listen: false)
+          .fetch();
     } catch (error) {
       print(error);
       await showDialog(
@@ -56,14 +55,14 @@ class _EmployeesListViewState extends State<EmployeesListView> {
         _isLoading = true;
       });
       try {
-        await Provider.of<EmployeesProvider>(context)
-            .fetchEmployees(); /*.then((_) {
+        await Provider.of<ReceivedMessageProvider>(context)
+            .fetch(); /*.then((_) {
           setState(() {
             _isLoading = false;
           });
         });*/
       } catch (error) {
-        //print(error);
+        print(error);
         await showDialog(
           context: context,
           builder: (ctx) => AlertDialog(
@@ -90,29 +89,19 @@ class _EmployeesListViewState extends State<EmployeesListView> {
 
   @override
   Widget build(BuildContext context) {
-    final getEmployee = Provider.of<EmployeesProvider>(context);
-    final employees = getEmployee.employees;
+    final users =
+        Provider.of<ReceivedMessageProvider>(context).usersWithMassages;
 
     return Scaffold(
       backgroundColor: color1,
       appBar: AppBar(
         backgroundColor: color5,
+        title: const Text('Users with messages'),
         actions: [
           IconButton(
-            onPressed: () {
-              showSearch(
-                context: context,
-                delegate: EmployeeSearch(),
-              );
-            },
-            icon: const Icon(Icons.search),
-          ),
-          IconButton(
-            onPressed: () => setState(() {
-              _updateEmployeesList(context);
-            }),
+            onPressed: () => _updateUserList(context),
             icon: const Icon(Icons.refresh),
-          ),
+          )
         ],
       ),
       body: _isLoading
@@ -120,29 +109,15 @@ class _EmployeesListViewState extends State<EmployeesListView> {
               child: CircularProgressIndicator(),
             )
           : ListView.builder(
-              controller: ScrollController(),
-              itemCount: employees.length,
+              itemCount: users.length,
               itemBuilder: (_, i) => SingleChildScrollView(
                 child: Column(
                   children: [
-                    EmployeeItemView(
-                      id: employees[i].id,
-                      name: employees[i].fullName,
-                      job: employees[i].job,
-                    )
+                    UserRItem(index: users[i].userId),
                   ],
                 ),
               ),
             ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).pushNamed(AddEmployee.routeName);
-        },
-        backgroundColor: color5,
-        child: const Icon(
-          Icons.add,
-        ),
-      ),
     );
   }
 }

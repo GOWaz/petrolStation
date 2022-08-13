@@ -2,27 +2,24 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:stationapp/classes/employee_search.dart';
 import 'package:stationapp/constants.dart';
-import 'package:stationapp/pages/employee_pages/add_employee_page.dart';
-import 'package:stationapp/providers/employee_provider/employee_provider.dart';
-import 'package:stationapp/widgets/employee_widget/employee_item.dart';
+import 'package:stationapp/providers/report_provider/reports_provider.dart';
+import 'package:stationapp/widgets/report_item.dart';
 
-class EmployeesListView extends StatefulWidget {
-  const EmployeesListView({Key? key}) : super(key: key);
+class ReportsPage extends StatefulWidget {
+  const ReportsPage({Key? key}) : super(key: key);
 
   @override
-  State<EmployeesListView> createState() => _EmployeesListViewState();
+  State<ReportsPage> createState() => _ReportsPageState();
 }
 
-class _EmployeesListViewState extends State<EmployeesListView> {
-  Future<void> _updateEmployeesList(BuildContext context) async {
+class _ReportsPageState extends State<ReportsPage> {
+  Future<void> _updateReportsList(BuildContext context) async {
     setState(() {
       _isLoading = true;
     });
     try {
-      await Provider.of<EmployeesProvider>(context, listen: false)
-          .fetchEmployees();
+      await Provider.of<ReportsProvider>(context, listen: false).fetchReports();
     } catch (error) {
       print(error);
       await showDialog(
@@ -56,8 +53,8 @@ class _EmployeesListViewState extends State<EmployeesListView> {
         _isLoading = true;
       });
       try {
-        await Provider.of<EmployeesProvider>(context)
-            .fetchEmployees(); /*.then((_) {
+        await Provider.of<ReportsProvider>(context)
+            .fetchReports(); /*.then((_) {
           setState(() {
             _isLoading = false;
           });
@@ -90,29 +87,19 @@ class _EmployeesListViewState extends State<EmployeesListView> {
 
   @override
   Widget build(BuildContext context) {
-    final getEmployee = Provider.of<EmployeesProvider>(context);
-    final employees = getEmployee.employees;
-
+    final reports = Provider.of<ReportsProvider>(context).reports;
     return Scaffold(
       backgroundColor: color1,
       appBar: AppBar(
         backgroundColor: color5,
+        title: const Text('Reports'),
         actions: [
           IconButton(
             onPressed: () {
-              showSearch(
-                context: context,
-                delegate: EmployeeSearch(),
-              );
+              _updateReportsList(context);
             },
-            icon: const Icon(Icons.search),
-          ),
-          IconButton(
-            onPressed: () => setState(() {
-              _updateEmployeesList(context);
-            }),
             icon: const Icon(Icons.refresh),
-          ),
+          )
         ],
       ),
       body: _isLoading
@@ -120,29 +107,15 @@ class _EmployeesListViewState extends State<EmployeesListView> {
               child: CircularProgressIndicator(),
             )
           : ListView.builder(
-              controller: ScrollController(),
-              itemCount: employees.length,
+              itemCount: reports.length,
               itemBuilder: (_, i) => SingleChildScrollView(
                 child: Column(
                   children: [
-                    EmployeeItemView(
-                      id: employees[i].id,
-                      name: employees[i].fullName,
-                      job: employees[i].job,
-                    )
+                    ReportItem(id: reports[i].id),
                   ],
                 ),
               ),
             ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).pushNamed(AddEmployee.routeName);
-        },
-        backgroundColor: color5,
-        child: const Icon(
-          Icons.add,
-        ),
-      ),
     );
   }
 }

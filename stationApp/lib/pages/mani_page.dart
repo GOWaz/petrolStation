@@ -59,6 +59,10 @@ class _MainPageState extends State<MainPage> {
                   icon: Icons.circle_notifications,
                   label: 'Notifications',
                 ),
+                SideNavigationBarItem(
+                  icon: Icons.info,
+                  label: 'About',
+                ),
               ],
               onTap: (index) {
                 setState(() {

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:stationapp/classes/conditions.dart';
+import 'package:stationapp/classes/storage.dart';
 import 'package:stationapp/constants.dart';
 import 'package:stationapp/providers/tank.dart';
 
@@ -15,9 +16,14 @@ class TankState extends StatefulWidget {
 }
 
 class _TankStateState extends State<TankState> {
+  var storage = Storage();
+  final _name = TextEditingController(text: '');
   Future<void> _updateState(BuildContext context) async {
+    setState(() {
+      _isLoading = true;
+    });
     try {
-      await Provider.of<Tank>(context).setPercentage();
+      await Provider.of<Tank>(context, listen: false).setPercentage();
     } catch (error) {
       //print(error);
       await showDialog(
@@ -36,6 +42,9 @@ class _TankStateState extends State<TankState> {
         ),
       );
     }
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   var _isInit = true;
@@ -48,12 +57,8 @@ class _TankStateState extends State<TankState> {
         _isLoading = true;
       });
       try {
-        await Provider.of<Tank>(context)
-            .setPercentage(); /*.then((_) {
-        setState(() {
-          _isLoading = false;
-        });
-      });*/
+        await Provider.of<Tank>(context).setPercentage();
+        _name.text = await storage.storage.read(key: "ADMINNAME") ?? '';
       } catch (error) {
         //print(error);
         await showDialog(
@@ -92,11 +97,10 @@ class _TankStateState extends State<TankState> {
       backgroundColor: color1,
       appBar: AppBar(
         backgroundColor: color5,
+        title: Text(_name.text),
         actions: [
           IconButton(
-              onPressed: () => setState(() {
-                    _updateState(context);
-                  }),
+              onPressed: () => _updateState(context),
               icon: const Icon(Icons.refresh))
         ],
       ),

@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:stationapp/pages/about.dart';
+import 'package:stationapp/pages/received.dart';
+import 'package:stationapp/pages/report_pages/reports_page.dart';
+import 'package:stationapp/widgets/bill_widget/bill_list_view.dart';
 import 'package:stationapp/widgets/employee_widget/employee_list_view.dart';
 import 'package:stationapp/widgets/tank_state.dart';
 import 'package:stationapp/widgets/user_widgets/users_list_view.dart';
 
 List<Widget> views = const [
   TankState(),
-  Center(
-    child: Text('Queue State'),
-  ),
-  Center(
-    child: Text('Income Status'),
-  ),
+  ReceivedMessagePage(),
+  BillView(),
   EmployeesListView(),
   UsersListView(),
-  Center(
-    child: Text('Notifications'),
-  ),
+  ReportsPage(),
+  About(),
 ];
 
 InputDecoration fieldDecoration(String hint) {
@@ -35,12 +34,6 @@ InputDecoration fieldDecoration(String hint) {
     ),
   );
 }
-
-/*var labelStyleInUserInfo = GoogleFonts.adamina(
-  color: color1,
-  fontSize: 20,
-  fontWeight: FontWeight.bold,
-);*/
 
 labelStyleInUserInfo(BuildContext ctx) {
   final size = MediaQuery.of(ctx).size;
@@ -66,3 +59,7 @@ const color3 = Color(0xFF757575);
 const color4 = Color(0xFFFFC107);
 const color5 = Color(0xFF00796B);
 const color6 = Color(0xFF797771);
+
+//192.168.1.107
+//192.168.43.198
+//192.168.43.230

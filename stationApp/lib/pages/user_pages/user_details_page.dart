@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:stationapp/constants.dart';
-import 'package:stationapp/pages/add_car.dart';
 import 'package:stationapp/pages/user_pages/edit_user.dart';
-import 'package:stationapp/providers/car_provider/car.dart';
-import 'package:stationapp/providers/car_provider/car_provider.dart';
 import 'package:stationapp/providers/user_provider/user.dart';
 import 'package:stationapp/providers/user_provider/user_provider.dart';
 
@@ -14,7 +10,8 @@ enum SelectionView { byID, byName }
 // ignore: must_be_immutable
 class UserDetails extends StatelessWidget {
   SelectionView? viewBy;
-  String? pointer;
+  // ignore: prefer_typing_uninitialized_variables
+  var pointer;
   UserDetails({this.viewBy, this.pointer, Key? key}) : super(key: key);
 
   static const routeName = '/userView';
@@ -23,39 +20,25 @@ class UserDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final getUser = Provider.of<UsersProvider>(context);
-    final getCar = Provider.of<CarsProvider>(context);
     var loadUser = User(
-      id: '',
+      id: 0,
       fullName: '',
       nationalNumber: '',
       phoneNumber: '',
       email: '',
       password: '',
-    );
-    var loadUserCar = Car(
-      id: '',
-      ownerId: '',
+      carId: 0,
+      ownerId: 0,
       carName: '',
       carNumber: '',
-      owner: '',
       category: '',
       amount: 0,
     );
 
     if (viewBy == SelectionView.byID) {
       loadUser = getUser.findById(pointer!);
-      loadUserCar = getCar.findById(pointer!);
     } else {
       loadUser = getUser.findByName(pointer!);
-      loadUserCar = getCar.findByName(pointer!);
-    }
-
-    bool checkOwen() {
-      if (loadUserCar.id != '') {
-        return true;
-      } else {
-        return false;
-      }
     }
 
     return Scaffold(
@@ -141,73 +124,43 @@ class UserDetails extends StatelessWidget {
                 height: size.height / 0.5,
                 width: size.width / 2.5,
                 color: color5,
-                child: checkOwen()
-                    ? Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                            'Car name:',
-                            style: labelStyleInUserInfo(context),
-                          ),
-                          Text(
-                            loadUserCar.carName,
-                            style: detailsStyleInUserInfo(context),
-                          ),
-                          Text(
-                            'Car number:',
-                            style: labelStyleInUserInfo(context),
-                          ),
-                          Text(
-                            loadUserCar.carNumber,
-                            style: detailsStyleInUserInfo(context),
-                          ),
-                          Text(
-                            'Category:',
-                            style: labelStyleInUserInfo(context),
-                          ),
-                          Text(
-                            loadUserCar.category,
-                            style: detailsStyleInUserInfo(context),
-                          ),
-                          Text(
-                            'Fuel amount:',
-                            style: labelStyleInUserInfo(context),
-                          ),
-                          Text(
-                            loadUserCar.amount.toString(),
-                            style: detailsStyleInUserInfo(context),
-                          ),
-                        ],
-                      )
-                    : Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              'Don\'t owen a car',
-                              style: GoogleFonts.adamina(
-                                color: color1,
-                                fontSize: size.height / 24,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(AddCar.routeName, arguments: [
-                                  loadUser.id,
-                                  loadUser.fullName
-                                ]);
-                              },
-                              icon: const Icon(
-                                Icons.add_circle,
-                                color: color1,
-                                size: 50,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      'Car name:',
+                      style: labelStyleInUserInfo(context),
+                    ),
+                    Text(
+                      loadUser.carName,
+                      style: detailsStyleInUserInfo(context),
+                    ),
+                    Text(
+                      'Car number:',
+                      style: labelStyleInUserInfo(context),
+                    ),
+                    Text(
+                      loadUser.carNumber,
+                      style: detailsStyleInUserInfo(context),
+                    ),
+                    Text(
+                      'Category:',
+                      style: labelStyleInUserInfo(context),
+                    ),
+                    Text(
+                      loadUser.category,
+                      style: detailsStyleInUserInfo(context),
+                    ),
+                    Text(
+                      'Fuel amount:',
+                      style: labelStyleInUserInfo(context),
+                    ),
+                    Text(
+                      loadUser.amount.toString(),
+                      style: detailsStyleInUserInfo(context),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -216,68 +169,3 @@ class UserDetails extends StatelessWidget {
     );
   }
 }
-
-/*
-IconButton(
-onPressed: () {
-showDialog(
-context: context,
-builder: (context) => AlertDialog(
-title: Row(
-children: const [
-Icon(
-Icons.warning,
-color: Colors.red,
-),
-Text(
-'Warning',
-style: TextStyle(
-color: Colors.red,
-fontWeight: FontWeight.bold,
-),
-),
-],
-),
-content: Text(
-'Are you sure you want to remove ${loadUser.fullName}?'
-'\nPress "Ok" to remove ${loadUser.fullName}.'
-'\nPress "Cancel" to go back.',
-style: GoogleFonts.inter(color: color5),
-),
-actions: [
-TextButton(
-onPressed: () => Navigator.pop(context),
-child: const Text('Cancel'),
-),
-TextButton(
-onPressed: () {
-if (viewBy == SelectionView.byID) {
-getUser.deleteUserByID(pointer);
-*/
-/*if (loadUserCar.id != '') {
-                            getCar.deleteCarByID(loadUserCar.id);
-                          }*/ /*
-
-Navigator.pop(context);
-} else {
-getUser.deleteUserByName(pointer);
-*/
-/*if (loadUserCar.id != '') {
-                            getCar.deleteCarByID(loadUserCar.id);
-                          }*/ /*
-
-Navigator.pop(context);
-}
-Navigator.pop(context);
-},
-child: const Text('Ok'),
-),
-],
-),
-);
-},
-icon: const Icon(
-Icons.delete_forever,
-color: Colors.redAccent,
-),
-),*/

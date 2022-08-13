@@ -1,42 +1,37 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:stationapp/providers/bill_provider/bill.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class BillsProvider with ChangeNotifier {
   // ignore: prefer_final_fields
-  List<Bill> _bills = [
-    Bill(
-        id: '1',
-        billNumber: 1,
-        amount: 20.0,
-        payment: 60000,
-        date: DateTime.now(),
-        userID: '1',
-        employeeID: '1'),
-    Bill(
-        id: '2',
-        billNumber: 2,
-        amount: 20.0,
-        payment: 60000,
-        date: DateTime.now(),
-        userID: '2',
-        employeeID: '1'),
-    Bill(
-        id: '3',
-        billNumber: 3,
-        amount: 20.0,
-        payment: 60000,
-        date: DateTime.now(),
-        userID: '3',
-        employeeID: '1'),
-    Bill(
-        id: '4',
-        billNumber: 4,
-        amount: 20.0,
-        payment: 60000,
-        date: DateTime.now(),
-        userID: '4',
-        employeeID: '1'),
-  ];
+  List<Bill> _bills = [];
+
+  Future<void> fetchPills() async {
+    var url = Uri.parse('http://192.168.1.8:7882/api/admin/get_all_bill');
+    try {
+      final response = await http.get(url);
+      //print(response.body);
+      final extractedData = json.decode(response.body) as List<dynamic>;
+      print(extractedData);
+      List<Bill> exBill = [];
+      for (int i = 0; i < extractedData.length; i++) {
+        final bill = Bill(
+            id: extractedData[i]['id'],
+            amount: extractedData[i]['amount'],
+            payment: extractedData[i]['payment'],
+            userID: extractedData[i]['user_id'],
+            employeeID: extractedData[i]['employee_id']);
+        exBill.add(bill);
+      }
+      _bills = exBill;
+      notifyListeners();
+    } catch (error) {
+      print(error);
+    }
+  }
 
   List<Bill> get bills {
     return [..._bills];

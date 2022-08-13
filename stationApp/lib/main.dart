@@ -5,14 +5,17 @@ import 'package:stationapp/pages/employee_pages/edit_employee.dart';
 import 'package:stationapp/pages/entry_page.dart';
 import 'package:provider/provider.dart';
 import 'package:stationapp/pages/mani_page.dart';
+import 'package:stationapp/pages/report_pages/report_details.dart';
 import 'package:stationapp/pages/user_pages/add_user.dart';
 import 'package:stationapp/pages/user_pages/edit_user.dart';
 import 'package:stationapp/pages/user_pages/user_details_page.dart';
 import 'package:stationapp/providers/bill_provider/bill_provider.dart';
 import 'package:stationapp/providers/car_provider/car_provider.dart';
 import 'package:stationapp/providers/employee_provider/employee_provider.dart';
+import 'package:stationapp/providers/report_provider/reports_provider.dart';
 import 'package:stationapp/providers/tank.dart';
 import 'package:stationapp/providers/user_provider/user_provider.dart';
+import 'package:stationapp/providers/user_provider/users_received_message_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -39,7 +42,13 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (BuildContext context) => CarsProvider(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => ReportsProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => ReceivedMessageProvider(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -52,6 +61,7 @@ class MyApp extends StatelessWidget {
           AddCar.routeName: (ctx) => const AddCar(),
           AddUser.routeName: (ctx) => const AddUser(),
           EditUser.routeName: (ctx) => const EditUser(),
+          ReportDetails.routeName: (ctx) => const ReportDetails(),
         },
       ),
     );
