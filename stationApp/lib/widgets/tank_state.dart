@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:stationapp/classes/conditions.dart';
 import 'package:stationapp/classes/storage.dart';
 import 'package:stationapp/constants.dart';
+import 'package:stationapp/providers/employee_provider/employee_provider.dart';
 import 'package:stationapp/providers/tank.dart';
 
 class TankState extends StatefulWidget {
@@ -16,6 +17,14 @@ class TankState extends StatefulWidget {
 }
 
 class _TankStateState extends State<TankState> {
+  Future<void> fetchAll() async {
+    try {
+      await Provider.of<EmployeesProvider>(context).fetchEmployees();
+    } catch (error) {
+      print(error);
+    }
+  }
+
   var storage = Storage();
   final _name = TextEditingController(text: '');
   Future<void> _updateState(BuildContext context) async {

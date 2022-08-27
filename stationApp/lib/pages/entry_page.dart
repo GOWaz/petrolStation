@@ -58,7 +58,7 @@ class _EntryPageState extends State<EntryPage> {
     });
     await _storage.write(key: "KEY_ADMINEMAIL", value: _adminEmail.text);
     await _storage.write(key: "KEY_PASSWORD", value: _password.text);
-    var url = Uri.parse('http://192.168.1.8:7882/api/admin/login');
+    var url = Uri.parse('http://$ip:7882/api/admin/login');
     /*print(_adminEmail.text);
     print(_password.text);*/
     try {
@@ -76,8 +76,6 @@ class _EntryPageState extends State<EntryPage> {
       _apiToken.text = await _storage.read(key: "KEY_APITOKEN") ?? '';
       final store = Storage();
       store.store(_name, _apiToken);
-      /*print(_name.text);
-      print(_apiToken.text);*/
     } catch (error) {
       print(error);
       throw (error);
@@ -178,7 +176,7 @@ class _EntryPageState extends State<EntryPage> {
                                         borderSide: BorderSide.none,
                                       ),
                                     ),
-                                    //obscureText: true,
+                                    obscureText: true,
                                     controller: _password,
                                     validator: (value) {
                                       if (value!.isEmpty) {

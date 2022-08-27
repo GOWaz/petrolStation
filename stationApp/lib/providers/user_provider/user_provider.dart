@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:stationapp/classes/storage.dart';
+import 'package:stationapp/constants.dart';
 import 'package:stationapp/providers/user_provider/user.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -11,7 +12,7 @@ class UsersProvider with ChangeNotifier {
   List<User> _users = [];
 
   Future<void> fetchUsers() async {
-    var url = Uri.parse('http://192.168.1.8:7882/api/admin/get_all_user');
+    var url = Uri.parse('http://$ip:7882/api/admin/get_all_user');
     try {
       final response = await http.get(url);
       //print(response.body);
@@ -55,7 +56,7 @@ class UsersProvider with ChangeNotifier {
   }
 
   Future<void> addUser(User user) async {
-    var url = Uri.parse('http://192.168.1.8:7882/api/admin/register_user');
+    var url = Uri.parse('http:/$ip:7882/api/admin/register_user');
     final storage = Storage();
     try {
       final api = TextEditingController(text: '');
@@ -97,8 +98,7 @@ class UsersProvider with ChangeNotifier {
   }
 
   Future<void> deleteUserByID(int id) async {
-    var url =
-        Uri.parse('http://192.168.1.8:7882/api/admin/delete_user_by_id/$id');
+    var url = Uri.parse('http://$ip:7882/api/admin/delete_user_by_id/$id');
     final storage = Storage();
     try {
       final api = TextEditingController(text: '');
@@ -117,7 +117,7 @@ class UsersProvider with ChangeNotifier {
   }
 
   Future<void> updateUser(int id, User updatedUser) async {
-    var url = Uri.parse('http://192.168.1.8:7882/api/admin/edit_user/$id');
+    var url = Uri.parse('http://$ip:7882/api/admin/edit_user/$id');
     final storage = Storage();
     try {
       final api = TextEditingController(text: '');

@@ -60,6 +60,9 @@ const color4 = Color(0xFFFFC107);
 const color5 = Color(0xFF00796B);
 const color6 = Color(0xFF797771);
 
+const ip = '192.168.68.28';
+
 //192.168.1.107
 //192.168.43.198
 //192.168.43.230
+//192.168.68.28

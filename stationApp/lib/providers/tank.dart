@@ -10,7 +10,7 @@ class Tank with ChangeNotifier {
   int _amounts = 0;
 
   Future<void> setPercentage() async {
-    var url = Uri.parse('http://192.168.1.8:7882/api/admin/get_amount');
+    var url = Uri.parse('http://192.168.68.28:7882/api/admin/get_amount');
     try {
       var response = await http.get(url);
       //print(response.body);

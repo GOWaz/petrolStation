@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print, use_rethrow_when_possible, unused_local_variable
 
 import 'package:flutter/material.dart';
+import 'package:stationapp/constants.dart';
 import 'package:stationapp/providers/employee_provider/employee.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -19,7 +20,7 @@ class EmployeesProvider with ChangeNotifier {
   }
 
   Future<void> fetchEmployees() async {
-    var url = Uri.parse('http://192.168.1.8:7882/api/admin/get_all_empoloyee');
+    var url = Uri.parse('http://$ip:7882/api/admin/get_all_empoloyee');
     try {
       final response = await http.get(url);
       //print(response.body);
@@ -54,7 +55,7 @@ class EmployeesProvider with ChangeNotifier {
   }
 
   Future<void> addEmployee(Employee emp) async {
-    var url = Uri.parse('http://192.168.1.8:7882/api/admin/register_empoloyee');
+    var url = Uri.parse('http://$ip:7882/api/admin/register_empoloyee');
     try {
       final response = await http.post(
         url,
@@ -76,8 +77,7 @@ class EmployeesProvider with ChangeNotifier {
 
   Future<void> updateEmployee(String id, Employee updatedEmployee) async {
     int index = int.parse(id);
-    var url = Uri.parse(
-        'http://192.168.1.8:7882/api/empoloyee/edit_empoloyee/$index');
+    var url = Uri.parse('http://$ip:7882/api/empoloyee/edit_empoloyee/$index');
     try {
       final response = await http.post(url, body: {
         'full_name': updatedEmployee.fullName,
@@ -95,8 +95,7 @@ class EmployeesProvider with ChangeNotifier {
 
   Future<void> deleteEmployee(id) async {
     int index = int.parse(id);
-    var url =
-        Uri.parse('http://192.168.1.8:7882/api/admin/delete_empoloyee/$index');
+    var url = Uri.parse('http://$ip:7882/api/admin/delete_empoloyee/$index');
     try {
       final response = await http.get(url);
       //print(response.body);

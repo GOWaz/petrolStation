@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stationapp/pages/add_car.dart';
+import 'package:stationapp/pages/bill_details.dart';
 import 'package:stationapp/pages/employee_pages/add_employee_page.dart';
 import 'package:stationapp/pages/employee_pages/edit_employee.dart';
 import 'package:stationapp/pages/entry_page.dart';
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
           AddUser.routeName: (ctx) => const AddUser(),
           EditUser.routeName: (ctx) => const EditUser(),
           ReportDetails.routeName: (ctx) => const ReportDetails(),
+          BillDetail.routeName: (ctx) => const BillDetail(),
         },
       ),
     );

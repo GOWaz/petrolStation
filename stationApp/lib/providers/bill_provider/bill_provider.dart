@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:stationapp/constants.dart';
 import 'package:stationapp/providers/bill_provider/bill.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -10,12 +11,12 @@ class BillsProvider with ChangeNotifier {
   List<Bill> _bills = [];
 
   Future<void> fetchPills() async {
-    var url = Uri.parse('http://192.168.1.8:7882/api/admin/get_all_bill');
+    var url = Uri.parse('http://$ip:7882/api/admin/get_all_bill');
     try {
       final response = await http.get(url);
       //print(response.body);
       final extractedData = json.decode(response.body) as List<dynamic>;
-      print(extractedData);
+      //print(extractedData);
       List<Bill> exBill = [];
       for (int i = 0; i < extractedData.length; i++) {
         final bill = Bill(
@@ -34,6 +35,10 @@ class BillsProvider with ChangeNotifier {
   }
 
   List<Bill> get bills {
-    return [..._bills];
+    return [..._bills.reversed];
+  }
+
+  Bill findById(int id) {
+    return _bills.firstWhere((element) => element.id == id);
   }
 }

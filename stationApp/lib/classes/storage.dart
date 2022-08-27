@@ -3,8 +3,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class Storage {
   final storage = const FlutterSecureStorage();
-  /*final adminEmailController = TextEditingController(text: '');
-  final passwordController = TextEditingController(text: '');*/
   final nameController = TextEditingController(text: '');
   final apiTokenController = TextEditingController(text: '');
 

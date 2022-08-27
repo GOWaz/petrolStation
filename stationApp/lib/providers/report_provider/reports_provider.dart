@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:stationapp/constants.dart';
 import 'package:stationapp/providers/report_provider/report.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -9,7 +10,7 @@ class ReportsProvider with ChangeNotifier {
   List<Report> _reports = [];
 
   Future<void> fetchReports() async {
-    var url = Uri.parse('http://192.168.1.8:7882/api/admin/get_compo');
+    var url = Uri.parse('http://$ip:7882/api/admin/get_compo');
     try {
       final response = await http.get(url);
       //print(response.body);

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_final_fields, avoid_print, use_rethrow_when_possible
 
 import 'package:flutter/material.dart';
+import 'package:stationapp/constants.dart';
 import 'package:stationapp/providers/user_provider/user_received_message.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -9,7 +10,7 @@ class ReceivedMessageProvider with ChangeNotifier {
   List<ReceivedMessage> _users = [];
 
   Future<void> fetch() async {
-    var url = Uri.parse('http://192.168.1.8:7882/api/admin/getReciveMessage');
+    var url = Uri.parse('http://$ip:7882/api/admin/getReciveMessage');
     try {
       final response = await http.get(url);
       //print(response.body);
